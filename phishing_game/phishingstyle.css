@@ -1,0 +1,41 @@
+body {
+  text-align: center;
+}
+#game-container {
+  margin: 50px;
+}
+#result-container {
+  position: absolute;
+  bottom: 100px;
+}
+#result {
+  font-weight: bold;
+  position: relative;
+  top: 100px;
+}
+.button {
+padding: .5rem 2rem;
+color: var(--white) !important;
+background-color: var(--primary-color);
+border-radius: 5px;
+border: none;
+}   
+
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.button {
+  padding: .5rem 2rem;
+  color: var(--white) !important;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  border: none;
+  }   
+  
+.startBtn {
+  background-color: #c0eefc;
+  z-index: 9999;
+}

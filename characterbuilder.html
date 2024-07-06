@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #001f3f; /* Dark blue background */
+            color: white; /* White text for contrast */
+        }
+
+        #videoContainer {
+            display: flex;
+            align-items: center;
+        }
+
+        canvas {
+            position: absolute;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #profileImgContainer {
+            margin-left: 20px;
+        }
+
+        .profileImage {
+            border-radius: 0%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="videoContainer">
+        <video id="video" width="640" height="480" autoplay muted></video>
+        <div id="profileImgContainer"></div>
+    </div>
+    <div id="output"></div>
+    <button id="assignProfileBtn">Assign Profile Picture</button>
+    <button onclick="window.location.href='https://codemaxxers.github.io/codemaxxerFrontend/dashboard'">Return to Dashboard</button>
+    <script defer src="face-api.min.js"></script>
+    <script defer src="cbscript.js"></script>
+</body>
+</html>

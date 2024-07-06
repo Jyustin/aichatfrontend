@@ -1,0 +1,106 @@
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the divs horizontally */
+    margin-top: 20px; /* Adjust top margin as needed */
+    margin-left: 270px;
+  }
+
+  .logo_items {
+    margin-left: 5%;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between; /* Space out the cards within each row */
+  }
+  
+  .summary-card {
+    width: 300px; /* Adjust width as needed */
+    padding: 20px;
+    background-color: #E5E4E2;
+    border-radius: 10px;
+    margin-left: 50px; /* Adjust margin to match sidebar width */
+    text-align: center;
+    margin-bottom: 20px; /* Adjust bottom margin as needed */
+    float: right;
+  }
+  
+  .summary-card h2 {
+    margin-top: 0;
+  }
+  
+  .summary-card img {
+    width: 50px; /* Adjust icon size as needed */
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: black;
+  }
+
+  p {
+    color: black;
+  }
+
+  .page-content {
+    padding: 0px !important;
+  }
+
+  .container-profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    height: 18vh; /* 20% of the viewport height */
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    background-color: #2a2930;
+  }
+
+  .sumText {
+    margin-left: 330px;
+  }
+
+  #initName {
+    height: 50px;
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  #detailText {
+    font-size: 22.5px;
+  }
+
+  .allBoxes {
+    margin-top: 12%;
+  }
+
+  .summary-row {
+    margin-top: 2%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+
+  .logo {
+    width: 105px !important;
+    height: auto !important;
+  }
+
+  .logo_name {
+    font-size: 65px;
+    margin-left: 10px;
+  }
+
+  .logo_items flex {
+    margin-left: 10px;
+  }
+
+  #sidebar_close {
+    height: 50px;
+  }

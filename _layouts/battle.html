@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+    <!--Links to the CSS and JS so the md file isn't to big-->
+    <link rel="stylesheet" href="{{ "/assets/css/fight.css" | relative_url }}">
+    <style>
+      html, body {
+        width: 100%;
+        height:100%;
+      }
+
+      .banner {
+        width: 100%;
+        height:100vh;
+        background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0, 0, 0, 0.4)),url(images/good.jpeg);
+        background-size: cover;
+        background-position: center;
+    }
+    </style>
+    <div class="banner">
+    <div class="page-wrapper">
+      <main class="page-content" aria-label="Content">
+          {{ content }}
+      </main>
+    </div>
+  </div>
+  </body>
+
+</html>

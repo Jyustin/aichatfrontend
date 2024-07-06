@@ -1,0 +1,657 @@
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: 'Press Start 2P', cursive;
+        box-sizing: border-box;
+      }
+  
+      body {
+        background-image: url("https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/pb2.jpeg");
+      }
+  
+      h1 {
+        margin: 0;
+      }
+  
+      button {
+        border: 0;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #ddd;
+      }
+
+      .dialog-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        display: none;
+      }
+      .battle{
+        position: absolute;
+        top: 600px;
+        left: 100px;
+        border:  10px solid black;
+      }
+
+      .enterhouse{
+        position: absolute;
+        top: 500px;
+        left: 100px;
+        border:  10px solid black;
+      }
+
+    .characterBar {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 10px solid black;
+      padding: 20px;
+      background-color: rgb(202, 197, 197);
+      margin-top: 650px;
+    }
+
+    .characterBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fade-in 1s ease-in-out; /* Apply fade-in animation */
+    }
+
+    .questLog,
+    .stats {
+      margin-left: 50px;
+      display: flex;
+      flex-direction: column; /* Changed to column */
+      align-items: center;
+      text-align: center;
+    }
+
+    .questLog {
+      margin-top: 10px;
+    }
+
+    .stats {
+      margin-left: auto;
+    }
+
+    .level {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #xp-bar {
+      background-color: #ddd;
+      height: 10px; /* Adjust height as needed */
+      width: 100%; /* Fills the parent element */
+      position: absolute;
+      top: 40px;
+      left: 0;
+    }
+
+    #xp-bar-progress {
+      content: ''; /* This creates the inner progress bar element */
+      background-color: #008000; /* Adjust color as needed */
+      height: 10px; /* Fills the entire height of the .xp-bar */
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 0%; /* This will be dynamically changed based on current XP */
+    }
+
+
+    @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    #canvas {
+      animation: fade-in 1s ease-in-out; /* Apply fade-in animation */
+    }
+
+    .questLog:hover {
+      cursor: pointer;
+      /* border: 3px solid rgb(67, 128, 219); */
+      border: 3px solid rgb(18, 70, 175);
+      transition: border-color 0.3s ease-in-out; /* Smooth transition for border color */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Optional: add shadow effect */
+    }
+
+    .questLog {
+      padding: 10px;
+      border: 3px solid transparent; /* Start with a transparent border */
+    }
+
+    #questLogDialog {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 2px solid black;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+      z-index: 9999;
+      display: none;
+      width: 80%;
+      max-width: 1000px; /* Adjust max-width as needed */
+      padding: 20px;
+    }
+
+    .quest {
+        margin-bottom: 20px;
+    }
+
+    .quest h2 {
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    .quest p {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .quest img {
+      width: 50px; /* Adjust size as needed */
+      height: auto;
+      margin-right: 10px;
+    }
+
+    .questLog button {
+        margin-top: 20px;
+    }
+
+    .quest-tabs {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .tab {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #ddd;
+        border: 1px solid black;
+        border-radius: 5px 5px 0 0;
+        margin-right: 5px;
+    }
+
+    .tab.active {
+        background-color: white;
+    }
+
+    .tab-content {
+        display: none;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    #mainQuestText {
+      margin-bottom: 10px;
+    }
+
+    #closeQuestButton {
+      margin-top: 10px;
+    }
+
+    #weapon-image,
+    #armor-image {
+      width: 50px;
+      height: auto;
+      display: block;
+      margin: 0 auto; /* Center the image horizontally */
+  }
+
+  .quest {
+    margin-bottom: 20px;
+  }
+
+  .quest h2 {
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+
+  .quest-details {
+    display: flex;
+  }
+
+  .quest-objective,
+  .quest-reward {
+    flex: 1;
+    padding: 0px 20px 20px 20px;
+    background-color: rgb(207, 201, 201);
+    border: 4px solid black;
+  }
+
+  .quest-objective {
+    margin-right: 5px;
+  }
+
+  .quest-reward img {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    margin-top: 10px;
+  }
+
+  #menuButton {
+    margin-top: 40px;
+    padding: 6px;
+    text-align: center; /* Center the text inside the button */
+    width: 60%; /* Make the button fill the available width */
+    margin-left: 20%; /* Center the button horizontally */
+    margin-right: 20%; /* Center the button horizontally */
+  }
+
+  #menuPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: none;
+    width: 80%;
+    max-width: 400px; /* Adjust max-width as needed */
+  }
+
+  .button-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 10px;
+      padding: 20px;
+  }
+
+  .image-button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: center;
+  }
+
+  .image-button img {
+      max-width: 100px; /* Adjust as needed */
+      max-height: 100px; /* Adjust as needed */
+  }
+
+  #popupMenuText {
+    margin-bottom: 20px;
+  }
+
+  </style>
+  </head>
+  
+  <div style="display: inline-block; position: absolute; top: 50px; left: 50px; border:  10px solid black;">
+    <div
+      id="overlappingDiv"
+      style="
+        background-color: black;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+      "
+    ></div>
+  
+    <canvas id="canvas"></canvas>
+
+    <div class="dialog-container">
+        <p id="question"></p>
+        <input type="text" id="answer">
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+
+  
+    <div
+      id="characterDialogueBox"
+      style="
+        background-color: white;
+        height: 140px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 4px black solid;
+        display: none;
+        padding: 12px;
+      "
+    ></div>
+
+    <div
+      id="tutorialDialogueBox"
+      style="
+        background-color: white;
+        height: 140px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 4px black solid;
+        display: none;
+        padding: 12px;
+      "
+    ></div>
+  
+    <div id="userInterface" style="display: none">
+      <!-- Represents health bar of draggle (enemy) -->
+      <div
+        style="
+          background-color: white;
+          width: 250px;
+          position: absolute;
+          top: 50px;
+          left: 50px;
+          border: 4px black solid;
+          padding: 12px;
+        "
+      >
+        <h1 style="font-size: 16px">Draggle</h1>
+        <div style="position: relative">
+          <div
+            style="height: 5px; background-color: #ccc; margin-top: 10px"
+          ></div>
+          <div
+            id="enemyHealthBar"
+            style="
+              height: 5px;
+              background-color: green;
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+            "
+          ></div>
+        </div>
+      </div>
+  
+      <!-- Represents health bar of emby (us) -->
+      <div
+        style="
+          background-color: white;
+          width: 250px;
+          position: absolute;
+          top: 330px;
+          right: 50px;
+          border: 4px black solid;
+          padding: 12px;
+        "
+      >
+        <h1 style="font-size: 16px">Emby</h1>
+        <div style="position: relative">
+          <div
+            style="height: 5px; background-color: #ccc; margin-top: 10px"
+          ></div>
+          <div
+            id="playerHealthBar"
+            style="
+              height: 5px;
+              background-color: green;
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+            "
+          ></div>
+        </div>
+      </div>
+  
+      <div
+        style="
+          background-color: white;
+          height: 140px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-top: 4px black solid;
+          display: flex;
+        "
+      >
+        <div
+          id="dialogueBox"
+          style="
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            padding: 12px;
+            display: none;
+            cursor: pointer;
+          "
+        >
+        </div>
+        <div
+          id="attacksBox"
+          style="
+            width: 66.66%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 33.33%;
+            border-left: 4px black solid;
+          "
+        >
+          <h1 id="attackType" style="font-size: 16px">Attack Type</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <button id="battle" class="Battle">Battle Enemy</button>
+  <button id="enterhouse" class="Battle">Enter House</button>
+  <div class="characterBar">
+    <div class="questLog" onclick="openQuestLog()">
+      <h1>Quest<br>Log<br><img src="https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/book.png" style="width: 75px; height: auto;"></h1>
+    </div>
+    <div class="level">
+      <h1 id="playerLevel"></h1>
+      <div id="xp-bar"></div>
+      <div id="xp-bar-progress"></div>
+      <button id="menuButton" onclick="openMenu()">Menu</button>
+    </div>
+    <div class="stats">
+      <h1 id="playerHealth"></h1>
+      <br>
+      <h1 id="playerDamage"></h1>
+    </div>
+  </div>
+  <div id="questLogDialog" class="dialog-container">
+    <img src="https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/book.png" style="width: 75px; height: auto;"><h1 id="mainQuestText">Quest Log</h1>
+    <div class="quest-tabs">
+      <div class="tab active" onclick="openTab(event, 'quest1')">Quest 1</div>
+      <div class="tab" onclick="openTab(event, 'quest2')">Quest 2</div>
+      <!-- Add more tabs as needed -->
+    </div>
+    <div class="tab-content" id="quest1">
+      <div class="quest">
+        <h2>Journey to the Coding Realm</h2>
+        <p>Bob needs training for his next fighting tournament.</p>
+        <div class="quest-details">
+          <div class="quest-objective">
+            <p>Your objective: Fight Bob once</p>
+          </div>
+          <div class="quest-reward">
+            <p>Your reward:</p>
+            <img id="weapon-image" src="https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/weapons/2000.png" alt="Weapon Image">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="quest2" style="display: none;">
+      <div class="quest">
+        <h2>Journey to the Coding Realm</h2>
+        <p>You should level up before venturing into the other islands</p>
+        <div class="quest-details">
+          <div class="quest-objective">
+            <p>Your objective: Get to level 2</p>
+          </div>
+          <div class="quest-reward">
+            <p>Your reward:</p>
+            <img id="armor-image" src="https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/armor/1000.png" alt="Armor Image">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add more tab-content sections as needed -->
+    <button id='closeQuestButton' onclick="closeQuestLog()">Close</button>
+  </div>
+  <div id="menuPopup" class="dialog-container">
+    <!-- Add content for the menu popup here -->
+    <h1 id="popMenuText">Menu</h1>
+      <div class="button-container">
+          <button class="image-button" onclick="dashboardLink()">
+              <img src="https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/backArrow.png" alt="Back">
+              <br>
+              Exit<br>Game
+          </button>
+          <button class="image-button" onclick="gearLink()">
+              <img src="https://raw.githubusercontent.com/Codemaxxers/codemaxxerFrontend/main/game/img/swapArrow.png" alt="Change Gear">
+              <br>
+              Change<br>Gear
+          </button>
+      </div>
+    <button id="closeMenuButton" onclick="closeMenu()">Close</button>
+  </div>  
+  <script>
+    const battleButton = document.getElementById('battle');
+    battleButton.addEventListener('click', function() {
+      window.location.href = '/codemaxxerFrontend/fight';
+    });
+  </script>
+  <script>
+    const enterhouseButton = document.getElementById('enterhouse');
+    enterhouseButton.addEventListener('click', function() {
+      window.location.href = '/codemaxxerFrontend/insidehouse';
+    });
+  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+    integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+    integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="data/audio.js"></script>
+  <script src="data/battleZones.js"></script>
+  <script src="data/collisions.js"></script>
+  <script src="data/attacks.js"></script>
+  <script src="data/monsters.js"></script>
+  <script src="data/characters.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="classes.js"></script>
+  <script src="index.js"></script>
+  <script src="battlescene.js"></script>
+
+  <script>
+    canvas.addEventListener('click', function(event) {
+    // Check if the click occurred in the top half of the canvas
+    if (event.clientY < canvas.height / 2) {
+        // Fetch questions from the API
+        fetch('http://localhost:8032/api/questions/random/csp')
+            .then(response => response.json())
+            .then(questions => {
+                // Extract the first question from the response
+                const question = questions;
+
+                // Display the question in the dialog box
+                document.getElementById('question').textContent = question.question;
+
+                // Show the dialog box
+                document.querySelector('.dialog-container').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching questions:', error);
+            });
+    }
+});
+
+// Function to check the user's answer
+  function checkAnswer() {
+    const userAnswer = document.getElementById('answer').value;
+
+    // Close the dialog box
+    document.querySelector('.dialog-container').style.display = 'none';
+
+    // Fetch questions from the API
+    fetch('http://localhost:8032/api/questions/random/csp')
+        .then(response => response.json())
+        .then(questions => {
+            // Extract the first question from the response
+            const question = questions;
+
+            // Check if the user answer matches the correct answer
+            if (userAnswer && userAnswer === question["answer" + question.correctAnswer]) {
+                // Display correct message
+                alert('Correct!');
+            } else {
+                // Display incorrect message
+                alert('Incorrect!');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching questions:', error);
+    }); 
+  }
+
+  function openMenu() {
+    document.getElementById('menuPopup').style.display = 'block';
+  }
+
+  function closeMenu() {
+    document.getElementById('menuPopup').style.display = 'none';
+  }
+
+
+  const characterBar = document.querySelector('.characterBar');
+  characterBar.style.width = (window.innerWidth - 300) + 'px';
+  console.log(characterBar.style.width);
+
+  function dashboardLink() {
+    window.location.href = '/codemaxxerFrontend/dashboard';
+  }
+
+  function gearLink() {
+    
+  }
+  </script>

@@ -1,0 +1,17 @@
+title: Rift
+description: "Fight your way through studying"
+owner_name: Finn C, Theo H, Tanisha P, Justin N, Luna I, Rachit J
+github_username: Codemaxxers
+github_repo: "codemaxxerFrontend"
+repository: "F1nnC/codemaxxerFrontend"
+baseurl: "/codemaxxerFrontend"
+remote_theme: jekyll/minima
+minima:
+# ]remote_theme: pages-themes/dinky@v0.2.0
+# remote_theme: pages-themes/minimal@v0.2.0
+# remote_theme: pages-themes/hacker@v0.2.0
+# remote_theme: pages-themes/cayman@v0.2.0
+# remote_theme: pages-themes/time-machine@v0.2.0
+plugins:
+- jekyll-remote-theme
+future: true

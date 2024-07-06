@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<title>Click Logo!</title>
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background-color: #000d18;
+    }
+
+    .container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.2); /* Start scaled down */
+        width: 3840px; /* Updated width */
+        height: 2880px; /* Updated height */
+        cursor: pointer;
+        z-index: 10;
+        background: url('/codemaxxerFrontend/images/faviconpng-transformed.png') no-repeat center center;
+        background-size: cover; /* Changed to cover to ensure full coverage */
+        transition: transform 1s ease-out; /* Zoom animation */
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        transition: background-color 1s ease-in;
+        z-index: 11; /* Overlay above the container */
+        pointer-events: none; /* Prevent the overlay from blocking clicks */
+    }
+
+    #main-content {
+        display: none;
+        padding: 0px;
+        text-align: center;
+        background-color: #fff;
+    }
+</style>
+</head>
+<body>
+<div class="container" onclick="animateOpen()"></div>
+<div class="overlay"></div>
+<div id="main-content">
+    <h1>Welcome to the Page!</h1>
+    <p>This is the main content of the page that appears after the animation.</p>
+</div>
+<script>
+    function animateOpen() {
+        // Start zoom animation
+        const container = document.querySelector('.container');
+        container.style.transform = 'translate(-50%, -50%) scale(3)'; // Zoom in effect
+
+        // Start fading to black after the zoom
+        setTimeout(function() {
+            document.querySelector('.overlay').style.backgroundColor = 'rgba(0,0,0,1)'; // Fade to black
+        }, 1000); // Trigger fade after the zoom ends
+
+        // After animations, redirect or change content
+        setTimeout(function() {
+            window.location.href = '/codemaxxerFrontend/'; // Adjust the path to your target page
+        }, 2000); // Adjust delay to total duration of animations
+    }
+</script>
+    
+</body>
+</html>

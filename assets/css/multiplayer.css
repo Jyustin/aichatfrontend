@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+.fight-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* Align items to the top */
+    margin-top: 50px;
+}
+
+
+.player-box,
+.enemy-box {
+    width: 400px;
+    height: 300px; /* Increased height for player box */
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; 
+}
+
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.flashing {
+    animation: flash 0.5s infinite alternate; /* Use alternate to switch back and forth */
+}
+.question-box {
+    position: absolute;
+    right: 40%;
+    top: 10%;
+    width: 350px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "DotGothic16", sans-serif;
+    color: black;
+}
+
+.death {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.question-box h1 {
+    margin-top: 0;
+    color: #333;
+}
+
+#answers div {
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#answers div:hover {
+    background-color: #ccc;
+}
+
+.alert {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 30px;
+    border-radius: 8px;
+    position: absolute;
+    top: 40vh;
+    left: 45vw;
+}
+
+.player-box {
+    width: 150px;
+}
+
+.player-box img,
+.enemy-box img {
+    width: 100%;
+    height: 100%; /* Keep the image fill the box */
+    object-fit: cover;
+}
+
+.controller {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 40vh;
+    margin-left: 3vw;
+    margin-right: 80vw;
+    height: 175px;
+    display: grid;
+    width: 8%;
+}
+
+
+.controllerSIGN {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 40vh;
+    margin-left: 5%;
+    margin-right: 80vw;
+    height: 175px;
+    display: grid;
+    width: 90%;
+}
+
+.move {
+    /* background-color: #e0e0e0; */
+    color: #333;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "DotGothic16", sans-serif;
+    font-size: 1.5em;
+}
+
+.moveATK {
+    background-color: #1e1e1e;
+    color: #333;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    width: 150px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.move:hover {
+    background-color: #ccc;
+}
+
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+    font-family: "DotGothic16", sans-serif;
+
+}
+
+.player-box {
+    margin-bottom: 50px; /* Add margin to push it down */
+    transform: translate(5vw, 50vh); /* Move the player image down */
+}
+
+.enemy-box {
+    order: 2; /* Order the enemy box to appear second */
+    transform: translate(1vw, 40vh); /* Move the player image down */
+}
+
+p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    font-family: "DotGothic16", sans-serif;
+}
+
+b {
+    color: #ff6347;
+}
+
+#response-box {
+    color: white;
+}
+
+/* Shadow/platform effect */
+.player-box::after,
+.enemy-box::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.5);
+}
+
+.health-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f7f7f7;
+    position: absolute;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 40vh;
+    margin-left: 18vw;
+    margin-right: 52vw;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.backgroundStyle {
+    background-color: #e0e0e0;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "DotGothic16", sans-serif;
+    height: 100%;
+}
